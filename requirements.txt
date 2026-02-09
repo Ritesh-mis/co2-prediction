@@ -1,10 +1,10 @@
 setuptools
 wheel
-flask==3.1.0
+flask==3.0.3
+gunicorn
 pandas
+numpy==1.26.4
+scikit-learn==1.4.2
 cloudpickle
-gunicorn==20.1.0
-scikit-learn==1.5.2
 plotly==5.14.1
-Werkzeug>=2.2.2
-numpy==1.23.5
+Werkzeug>=2.3
