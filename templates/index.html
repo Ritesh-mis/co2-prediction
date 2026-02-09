@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO2 Emission Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CO2 Emission Prediction</h1>
+            <p>Accurately forecast your steel production's environmental impact and explore actionable insights for sustainability.</p>
+        </header>
+
+        <div class="card">
+            <div class="form-container">
+                <form id="prediction-form">
+                    <div class="form-group">
+                        <label for="usage_kwh">Usage kWh (Hourly Value)</label>
+                        <input type="number" id="usage_kwh" name="usage_kwh" min="0" step="10" required>
+                        <small>Typical value is around 120 kWh for an hourly period.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lagging_reactive">Lagging Current Reactive Power kVarh (Hourly Value)</label>
+                        <input type="number" id="lagging_reactive" name="lagging_reactive" min="0" step="1" required>
+                        <small>Typical value is around 60 for an hourly period.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="leading_reactive">Leading Current Reactive Power kVarh (Hourly Value)</label>
+                        <input type="number" id="leading_reactive" name="leading_reactive" min="0" step="1" required>
+                        <small>Typical value is around 16 for an hourly period.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="power_factor">Lagging Current Power Factor (Hourly Value)</label>
+                        <input type="number" id="power_factor" name="power_factor" min="0" step="1" required>
+                        <small>Typical value is around 80 for an hourly period.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nsm">NSM (Hourly Value)</label>
+                        <input type="number" id="nsm" name="nsm" min="0" step="1000" required>
+                        <small>Typical value is around 42,000 for an hourly period.</small>
+                    </div>
+                    
+                    <button type="submit" class="btn-predict">Predict</button>
+                </form>
+            </div>
+            
+            <div class="results-container" id="results" style="display: none;">
+                <div class="result-header">
+                    <h2>Prediction Results</h2>
+                </div>
+                
+                <div class="result-box main-result">
+                    <h3>Predicted CO2 Emission (hourly basis):</h3>
+                    <p id="prediction-value" class="highlight-value">0.00 tons</p>
+                </div>
+                
+                <div class="result-box">
+                    <h3>🌳 Tree Equivalents</h3>
+                    <p>To offset this CO2 emission, you'd need between <span id="min-trees">0</span> and <span id="max-trees">0</span> trees on hourly basis!</p>
+
+                    <div class="fun-fact">
+                        <p>🌍 Planting trees helps absorb CO2, improve air quality, and support biodiversity.</p>
+                        <p>🌱 On average, a mature tree can absorb between 15 to 30 kg of CO2 annually. It's a simple and effective way to contribute to a cleaner, greener planet!</p>
+                    </div>
+                </div>
+                
+                <div class="result-box comparisons">
+                    <h3>Emission Comparisons</h3>
+                    <p>🚗 This CO2 emission is equivalent to driving a car for about <span id="car-km">0</span> kilometers!</p>
+                    <p>✈️ Or flying for about <span id="airplane-km">0</span> kilometers in an airplane!</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 CO2 Emission Prediction Tool | MLOps Project</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
